@@ -9,7 +9,7 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'gql', '--image', 'gcr.io/$PROJECT_ID/gql', '--region', '$_REGION','--vpc-connector','vpc-connector','--vpc-egress','private-ranges-only','--update-env-vars','PRICE_HOST=price,PRICE_PORT=8080,MD_HOST=md,MD_PORT=8080,WH_HOST=wh,WH_PORT=8080,CART_HOST=cart,CART_PORT=8080,SUFFIX=uagwnxqziq-ew.a.run.app,DEBUG=true']
+  args: ['run', 'deploy', 'gql', '--image', 'gcr.io/$PROJECT_ID/gql', '--region', '$_REGION','--vpc-connector','vpc-connector','--vpc-egress','private-ranges-only','--update-env-vars','PRICE_HOST=price,PRICE_PORT=8080,MD_HOST=md,MD_PORT=8080,WH_HOST=wh,WH_PORT=8080,CART_HOST=cart,CART_PORT=8080,SUFFIX=$_SUFFIX.run.app,DEBUG=true']
 # Now our sa for auth
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
