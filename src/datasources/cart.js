@@ -1,20 +1,24 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import CatalogAPI from './catalog';
+import {GoogleAuth} from 'google-auth-library';
 
-const KEY = process.env.API_KEY || 'key';
+const auth = new GoogleAuth();
 
 class CartAPI extends RESTDataSource {
 
   constructor(DEBUG) {
     super();
     if (DEBUG) this.debug = true;
-    this.baseURL = `http://${process.env.CART_HOST || 'localhost'}:${process.env.CART_PORT || 3000}/cart`;
+    this.baseURL = `https://${process.env.CART_HOST + '-' + process.env.SUFFIX || 'localhost'}/cart`;
     this.catalog = new CatalogAPI(DEBUG);
   }
 
-  willSendRequest(request) {
-    if (this.debug) console.log('Setting x-api-key header to: %s', KEY);
-    request.headers.set('x-api-key', KEY);
+  async willSendRequest(request) {
+    let client = await auth.getIdTokenClient(`https://cart-${process.env.SUFFIX}`);
+    let headers = await client.getRequestHeaders();
+
+    if (this.debug) console.log('Setting bearer token with google-auth-library', headers.Authorization);
+    request.headers.set('Authorization', headers.Authorization);
   }
 
   async getCarts() {

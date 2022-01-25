@@ -4,8 +4,6 @@ import {GoogleAuth} from 'google-auth-library';
 
 const auth = new GoogleAuth();
 
-const KEY = process.env.API_KEY || 'key';
-
 class PricesAPI extends RESTDataSource {
 
   constructor(DEBUG) {
@@ -17,7 +15,7 @@ class PricesAPI extends RESTDataSource {
 
   async willSendRequest(request) {
     let client = await auth.getIdTokenClient(`https://price-${process.env.SUFFIX}`);
-    let headers = await client.getRequestHeaders()
+    let headers = await client.getRequestHeaders();
 
     if (this.debug) console.log('Setting bearer token with google-auth-library', headers.Authorization);
 

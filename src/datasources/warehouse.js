@@ -1,20 +1,24 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import MasterdataAPI from './masterdata';
-const KEY = process.env.API_KEY || 'key';
+import {GoogleAuth} from 'google-auth-library';
 
+const auth = new GoogleAuth();
 
 class WarehouseAPI extends RESTDataSource {
 
   constructor(DEBUG) {
     super();
     if (DEBUG) this.debug = true;
-    this.baseURL = `http://${process.env.WH_HOST || 'localhost'}:${process.env.WH_PORT || 3000}/warehouse`;
+    this.baseURL = `https://${process.env.WH_HOST + '-' + process.env.SUFFIX || 'localhost'}/warehouse`;
     this.md = new MasterdataAPI();
   }
 
-  willSendRequest(request) {
-    if (this.debug) console.log('Setting x-api-key header to: %s', KEY);
-    request.headers.set('x-api-key', KEY);
+  async willSendRequest(request) {
+    let client = await auth.getIdTokenClient(`https://wh-${process.env.SUFFIX}`);
+    let headers = await client.getRequestHeaders();
+
+    if (this.debug) console.log('Setting bearer token with google-auth-library', headers.Authorization);
+    request.headers.set('Authorization', headers.Authorization);
   }
 
   async getStock() {
