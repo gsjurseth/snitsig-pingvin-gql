@@ -1,0 +1,21 @@
+steps:
+# Build the container for gql
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gql', '.']
+  dir: 'src'
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/gql']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'gql', '--image', 'gcr.io/$PROJECT_ID/gql', '--region', '$_REGION','--vpc-connector','vpc-connector','--vpc-egress','private-ranges-only','--update-env-vars','PRICE_HOST=price,PRICE_PORT=8080,MD_HOST=md,MD_PORT=8080,WH_HOST=wh,WH_PORT=8080,CART_HOST=cart,CART_PORT=8080,SUFFIX=uagwnxqziq-ew.a.run.app,DEBUG=true']
+# Now our sa for auth
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'services', 'add-iam-policy-binding', 'price', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'services', 'add-iam-policy-binding', 'gql', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+images:
+- gcr.io/$PROJECT_ID/gql

@@ -1,0 +1,28 @@
+{
+  "name": "apigee-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --require @babel/register",
+    "start": "node start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-datasource-rest": "^3.5.1",
+    "apollo-server": "^3.6.2",
+    "google-auth-library": "^7.11.0",
+    "graphql": "^16.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/preset-env": "^7.13.5",
+    "@babel/register": "^7.13.0",
+    "chai": "^4.3.0",
+    "eslint": "^7.22.0",
+    "eslint-plugin-vue": "^7.7.0",
+    "mocha": "^8.3.0"
+  }
+}
