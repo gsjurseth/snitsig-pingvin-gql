@@ -16,6 +16,12 @@ steps:
   args: ['run', 'services', 'add-iam-policy-binding', 'price', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'services', 'add-iam-policy-binding', 'gql', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+  args: ['run', 'services', 'add-iam-policy-binding', 'md', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'services', 'add-iam-policy-binding', 'wh', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'services', 'add-iam-policy-binding', 'cart', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
 images:
 - gcr.io/$PROJECT_ID/gql
