@@ -79,8 +79,8 @@ class PricesAPI extends RESTDataSource {
     //let md = await this.md.getMasterdataById(m.md_ref);
     let reduced = {
       id: m._id,
-      //name: md.name,
-      //md: md,
+      name: md.name,
+      md: md,
       price: m.price
     };
     if (this.debug) console.log("price reduced: %j", reduced);
