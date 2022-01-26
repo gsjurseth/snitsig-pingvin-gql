@@ -75,8 +75,8 @@ class PricesAPI extends RESTDataSource {
 
   async priceReducer(m) {
     if (this.debug) console.log("In prices reducer: %j", m);
-    //this.md.initialize({});
-    //let md = await this.md.getMasterdataById(m.md_ref);
+    this.md.initialize({});
+    let md = await this.md.getMasterdataById(m.md_ref);
     let reduced = {
       id: m._id,
       name: md.name,
