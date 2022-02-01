@@ -18,6 +18,9 @@
                 <Name>GraphQL</Name>
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
+            <Step>
+                <Name>remodify-request</Name>
+            </Step>
         </Request>
         <Response>
             <Step>
