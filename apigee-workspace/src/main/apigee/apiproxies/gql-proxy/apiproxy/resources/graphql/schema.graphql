@@ -1,10 +1,10 @@
 # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-#type Cart {
-#  items: [CartItem]
-#  email: String!
-#  id: ID!
-#}
+type Cart {
+  items: [CartItem]
+  email: String!
+  id: ID!
+}
 
 type CartItem {
   id: ID!
@@ -54,4 +54,4 @@ type Query {
   catalogItemById(id: ID!): CatalogItem
   catalogItemByName(name: String!): CatalogItem
 }
-#cartByEmail(email: String!): Cart
+cartByEmail(email: String!): Cart
