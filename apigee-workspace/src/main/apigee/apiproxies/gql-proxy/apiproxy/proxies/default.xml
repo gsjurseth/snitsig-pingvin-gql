@@ -9,7 +9,7 @@
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
             <Step>
-                <Name>extract-graphql-quer</Name>
+                <Name>extract-graphql-query</Name>
             </Step>
             <Step>
                 <Name>modify-request</Name>
