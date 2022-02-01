@@ -24,9 +24,9 @@ steps:
   entrypoint: gcloud
   args: ['run', 'services', 'add-iam-policy-binding', 'cart', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
 - id: 'Use apigeecli to deploy apigee artifacts to the control plane'
-   name: gcr.io/apigee-product-demo/cloud-sdk:1.0.0
-   entrypoint: 'bash'
-   args:
+  name: gcr.io/apigee-product-demo/cloud-sdk:1.0.0
+  entrypoint: 'bash'
+  args:
    - -c
    - |
      gcloud auth print-access-token > /tmp/token
