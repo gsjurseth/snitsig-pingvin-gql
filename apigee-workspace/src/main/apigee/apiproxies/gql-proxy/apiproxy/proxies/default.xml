@@ -8,6 +8,10 @@
                 <Name>VerifyAPIKey</Name>
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
+            <Step>
+                <Name>GraphQL</Name>
+                <Condition>(request.verb != "OPTIONS")</Condition>
+            </Step>
         </Request>
         <Response>
             <Step>
