@@ -9,6 +9,12 @@
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
             <Step>
+                <Name>extract-graphql-quer</Name>
+            </Step>
+            <Step>
+                <Name>modify-request</Name>
+            </Step>
+            <Step>
                 <Name>GraphQL</Name>
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
