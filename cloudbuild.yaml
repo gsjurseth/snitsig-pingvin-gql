@@ -1,28 +1,28 @@
 steps:
 # Build the container for gql
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gql', '.']
-  dir: 'src'
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/gql']
-# Deploy container image to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'deploy', 'gql', '--image', 'gcr.io/$PROJECT_ID/gql', '--region', '$_REGION','--vpc-connector','vpc-connector','--vpc-egress','private-ranges-only','--update-env-vars','PRICE_HOST=price,PRICE_PORT=8080,MD_HOST=md,MD_PORT=8080,WH_HOST=wh,WH_PORT=8080,CART_HOST=cart,CART_PORT=8080,SUFFIX=$_SUFFIX.run.app,DEBUG=true']
-# Now our sa for auth
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'services', 'add-iam-policy-binding', 'price', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'services', 'add-iam-policy-binding', 'md', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'services', 'add-iam-policy-binding', 'wh', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'services', 'add-iam-policy-binding', 'cart', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gql', '.']
+#  dir: 'src'
+## Push the container image to Container Registry
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['push', 'gcr.io/$PROJECT_ID/gql']
+## Deploy container image to Cloud Run
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args: ['run', 'deploy', 'gql', '--image', 'gcr.io/$PROJECT_ID/gql', '--region', '$_REGION','--vpc-connector','vpc-connector','--vpc-egress','private-ranges-only','--update-env-vars','PRICE_HOST=price,PRICE_PORT=8080,MD_HOST=md,MD_PORT=8080,WH_HOST=wh,WH_PORT=8080,CART_HOST=cart,CART_PORT=8080,SUFFIX=$_SUFFIX.run.app,DEBUG=true']
+## Now our sa for auth
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args: ['run', 'services', 'add-iam-policy-binding', 'price', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args: ['run', 'services', 'add-iam-policy-binding', 'md', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args: ['run', 'services', 'add-iam-policy-binding', 'wh', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#  entrypoint: gcloud
+#  args: ['run', 'services', 'add-iam-policy-binding', 'cart', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
 - id: 'Use apigeecli to deploy apigee artifacts to the control plane'
   name: gcr.io/apigee-product-demo/cloud-sdk:1.0.0
   entrypoint: 'bash'
@@ -34,8 +34,8 @@ steps:
      ## Do the apigeecli work now
      #
      /tmp/apigeecli prefs set -s=false -o $PROJECT_ID
-     /tmp/apigeecli apis create -n $_SERVICE -p apigee-workspace/src/main/apigee/apiproxies/$_SERVICE-proxy/apiproxy -t $(cat /tmp/token) | awk -F '"' '$2 ~ "revision"{print $4}' > /tmp/re      vision
+     /tmp/apigeecli apis create -n $_SERVICE -p apigee-workspace/src/main/apigee/apiproxies/$_SERVICE-proxy/apiproxy -t $(cat /tmp/token) | awk -F '"' '$2 ~ "revision"{print $4}' > /tmp/revision
      /tmp/apigeecli apis deploy -v $(cat /tmp/revision) -r -n $_SERVICE -t $(cat /tmp/token)  -e $_ENV -s $_GSA@$PROJECT_ID.iam.gserviceaccount.com
-images:
-- gcr.io/$PROJECT_ID/gql
+#images:
+#- gcr.io/$PROJECT_ID/gql
 
