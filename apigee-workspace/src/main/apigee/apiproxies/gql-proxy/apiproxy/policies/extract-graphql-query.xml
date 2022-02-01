@@ -6,6 +6,9 @@
         <Variable name="graphqlquery">
             <JSONPath>$.query</JSONPath>
         </Variable>
+        <Variable name="originalbody">
+            <JSONPath>$.</JSONPath>
+        </Variable>
     </JSONPayload>
     <Source clearPayload="false">request</Source>
 </ExtractVariables>

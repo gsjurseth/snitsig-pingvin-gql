@@ -3,7 +3,7 @@
     <DisplayName>remodify-request</DisplayName>
     <Properties/>
     <Set>
-        <Payload contentType="application/json">\{ "query": "{graphqlquery}" }</Payload>
+        <Payload contentType="application/json">{originalbody}</Payload>
     </Set>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
 </AssignMessage>
