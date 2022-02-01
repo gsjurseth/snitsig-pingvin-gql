@@ -19,6 +19,9 @@
                 <Condition>(request.verb != "OPTIONS")</Condition>
             </Step>
             <Step>
+                <Name>UpdateQuery</Name>
+            </Step>
+            <Step>
                 <Name>remodify-request</Name>
             </Step>
         </Request>
