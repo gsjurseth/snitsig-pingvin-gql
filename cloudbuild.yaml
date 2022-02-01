@@ -23,5 +23,19 @@ steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args: ['run', 'services', 'add-iam-policy-binding', 'cart', '--member=serviceAccount:cloudrun-sa@geirs-purdy-project.iam.gserviceaccount.com', '--role=roles/run.invoker','--region','$_REGION']
+- id: 'Use apigeecli to deploy apigee artifacts to the control plane'
+   name: gcr.io/apigee-product-demo/cloud-sdk:1.0.0
+   entrypoint: 'bash'
+   args:
+   - -c
+   - |
+     gcloud auth print-access-token > /tmp/token
+     #
+     ## Do the apigeecli work now
+     #
+     /tmp/apigeecli prefs set -s=false -o $PROJECT_ID
+     /tmp/apigeecli apis create -n $_SERVICE -p apigee-workspace/src/main/apigee/apiproxies/$_SERVICE-proxy/apiproxy -t $(cat /tmp/token) | awk -F '"' '$2 ~ "revision"{print $4}' > /tmp/re      vision
+     /tmp/apigeecli apis deploy -v $(cat /tmp/revision) -r -n $_SERVICE -t $(cat /tmp/token)  -e $_ENV -s $_GSA@$PROJECT_ID.iam.gserviceaccount.com
 images:
 - gcr.io/$PROJECT_ID/gql
+
