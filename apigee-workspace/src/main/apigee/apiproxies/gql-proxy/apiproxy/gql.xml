@@ -1,0 +1,20 @@
+<APIProxy revision="1" name="gql">
+    <DisplayName>products</DisplayName>
+    <Description></Description>
+    <CreatedAt>1643710815224</CreatedAt>
+    <LastModifiedAt>1643710913609</LastModifiedAt>
+    <BasePaths>/gql</BasePaths>
+    <Policies>
+        <Policy>AddCors</Policy>
+        <Policy>VerifyAPIKey</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://parseAndCreateResponse.js</Resource>
+    </Resources>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

@@ -1,0 +1,6 @@
+{
+  "proxies": [
+    "catalog-proxy"
+  ],
+  "sharedflows": []
+}
