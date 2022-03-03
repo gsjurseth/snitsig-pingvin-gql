@@ -32,8 +32,8 @@ type Price {
   id: ID
   price: Int
   md: Masterdata
+  name: String
 }
-#name: String
 
 type Stock {
   id: ID
@@ -53,5 +53,5 @@ type Query {
   catalog: [CatalogItem]
   catalogItemById(id: ID!): CatalogItem
   catalogItemByName(name: String!): CatalogItem
-  #cartByEmail(email: String!): Cart
+  cartByEmail(email: String!): Cart
 }
