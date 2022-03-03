@@ -53,5 +53,5 @@ type Query {
   catalog: [CatalogItem]
   catalogItemById(id: ID!): CatalogItem
   catalogItemByName(name: String!): CatalogItem
-  #cartByEmail(email: String!): Cart
+  cartByEmail(email: String!): Cart
 }
