@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ExtractVariables continueOnError="false" enabled="true" name="extract-graphql-query">
+<ExtractVariables continueOnError="false" enabled="false" name="extract-graphql-query">
     <DisplayName>extract-graphql-query</DisplayName>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     <JSONPayload>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage continueOnError="false" enabled="true" name="remodify-request">
-    <DisplayName>remodify-request</DisplayName>
-    <Properties/>
-    <Set>
-        <Payload contentType="application/json">{newQuery}</Payload>
-    </Set>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <DisplayName>remodify-request</DisplayName>
+  <Properties/>
+  <Set>
+    <Payload contentType="application/json">{newQuery}</Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
 </AssignMessage>
